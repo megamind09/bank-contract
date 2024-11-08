@@ -1,0 +1,43 @@
+// SPDX-License-Identifier: UnLicenced
+pragma solidity ^0.8.17;
+
+contract BankAccount {
+    address public accHolder;
+    uint256 balance=0;
+    constructor(){
+        accHolder=msg.sender;
+    }
+
+    function withdraw() public payable{
+        require(msg.sender==accHolder,"You are not the Owner");
+        // require(msg.sender).transfer(balance);
+        balance -= msg.value;
+        require(balance>0 ,"No Enough BAlance in Account");
+
+    }
+
+     function Deposite() public payable{
+        require(msg.sender==accHolder,"You are not the Owner");
+        require(msg.value>0,"Ammount Should Be Greater Than 0");
+        balance+=msg.value;
+        
+    }
+
+     function ShowBalance() public view returns (uint){
+        require(msg.sender==accHolder,"You are not the Owner");
+        return balance;
+        
+     }
+}
+    
+
+
+
+
+
+
+
+
+
+
+
